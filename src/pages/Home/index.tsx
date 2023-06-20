@@ -3,7 +3,7 @@ import Register from './Components/Register';
 import Toggle from './Components/Toggle';
 import { Container, ContentContainer, Wave } from './styles';
 import useHome from './useHome';
-import waveLogin from '../../assets/waveTeste.svg';
+import waveLogin from '../../assets/background/waveLogin.svg';
 
 export default function Home() {
 	const { homeTemplate, handleToggleHomeTemplate } = useHome();

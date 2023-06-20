@@ -16,6 +16,9 @@ type IMyColors = {
 		main: string;
 		dark: string;
 	};
+	success: {
+		main: string;
+	};
 };
 
 type IMyTheme = {
