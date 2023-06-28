@@ -1,18 +1,39 @@
 import { Container } from './styles';
 import xCircleIcon from '../../../assets/icons/x-circle.svg';
 import checkCircleIcon from '../../../assets/icons/check-circle.svg';
+import IToast from '../../../utils/types/event/IToast';
+import { useEffect } from 'react';
 
 interface IToastMessage {
-	text: string;
-	type: 'default' | 'danger' | 'success';
+	message: IToast;
+	onRemoveMessage: (id: number) => void;
 }
 
-export default function ToastMessage({ text, type }: IToastMessage) {
+export default function ToastMessage({
+	onRemoveMessage,
+	message,
+}: IToastMessage) {
+	useEffect(() => {
+		const timeoutId = setTimeout(() => {
+			onRemoveMessage(message.id as number);
+		}, message.duration || 5000);
+
+		return () => {
+			clearTimeout(timeoutId);
+		};
+	}, [message, onRemoveMessage]);
+
+	function handlerRemoveToast() {
+		onRemoveMessage(message.id as number);
+	}
+
 	return (
-		<Container type={type}>
-			{type === 'danger' && <img src={xCircleIcon} alt="error" />}
-			{type === 'success' && <img src={checkCircleIcon} alt="success" />}
-			<strong>{text}</strong>
+		<Container type={message.type} onClick={handlerRemoveToast}>
+			{message.type === 'danger' && <img src={xCircleIcon} alt="error" />}
+			{message.type === 'success' && (
+				<img src={checkCircleIcon} alt="success" />
+			)}
+			<strong>{message.text}</strong>
 		</Container>
 	);
 }

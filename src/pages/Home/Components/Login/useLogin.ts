@@ -2,6 +2,7 @@ import { useState } from 'react';
 import useErrors from '../../../../hook/useErrors';
 import ZodGenericValidation from '../../../../lib/zod/ZodSchemaGeneric';
 import loginService from '../../../../services/LoginService';
+import { toast } from '../../../../utils/toast';
 
 export default function useLogin() {
 	const [email, setEmail] = useState<string>('');
@@ -33,13 +34,13 @@ export default function useLogin() {
 	async function handlerSubmit(event: React.FormEvent<HTMLFormElement>) {
 		setIsLoading(true);
 		event.preventDefault();
-		const teste = await loginService.post({ email, password });
-		if (!teste) {
+		const response = await loginService.post({ email, password });
+		if (!response) {
 			setIsLoading(false);
 			return;
 		}
 
-		alert(teste.token);
+		toast({ text: response.token, type: 'success' });
 		setIsLoading(false);
 	}
 

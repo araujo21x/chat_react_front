@@ -18,9 +18,9 @@ const containerVariants = {
 
 export const Container = styled.div<IContainerProps>`
 	width: 20rem;
-	height: 3.5rem;
-	max-height: 7.5rem;
-	padding: 1rem 2rem;
+	min-height: 5rem;
+	max-height: 12rem;
+	padding: 1.2rem 2rem;
 	background: ${({ theme }) => theme.colors.primary.dark};
 	border-radius: 4px;
 	box-shadow: 0px 20px 20px -16px rgba(0, 0, 0, 0.25);
@@ -30,8 +30,11 @@ export const Container = styled.div<IContainerProps>`
 	${({ type }) => containerVariants[type] || containerVariants.default}
 
 	strong {
+		width: 90%;
+		height: 100%;
 		color: ${({ theme }) => theme.colors.background};
 		font-size: 1.1rem;
+		overflow-wrap: break-word;
 	}
 
 	img {
