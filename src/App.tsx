@@ -4,16 +4,18 @@ import GlobalStyles from './assets/styles/global';
 import defaultTheme from './assets/styles/themes/default';
 import Router from './Router';
 import ToastContainer from './components/Toast/ToastContainer';
+import { AuthProvider } from './context/AuthContext';
 
 export default function App() {
 	return (
 		<BrowserRouter>
-			<ThemeProvider theme={defaultTheme}>
-				<GlobalStyles />
-				<ToastContainer />
-
-				<Router />
-			</ThemeProvider>
+			<AuthProvider>
+				<ThemeProvider theme={defaultTheme}>
+					<GlobalStyles />
+					<ToastContainer />
+					<Router />
+				</ThemeProvider>
+			</AuthProvider>
 		</BrowserRouter>
 	);
 }

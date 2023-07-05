@@ -2,12 +2,13 @@ import axios, { AxiosError } from 'axios';
 import { toast } from '../../utils/toast';
 
 interface IDataError {
-	errors: string;
+	errors?: string;
 }
 
-export default function (err: unknown | AxiosError) {
+export default function errorRequest(err: unknown | AxiosError) {
 	if (axios.isAxiosError(err)) {
 		const errorApi = err.response?.data as IDataError;
+
 		if (!errorApi.errors) {
 			toast({ text: 'Erro insperado no servidor', type: 'danger' });
 		} else {
@@ -15,7 +16,7 @@ export default function (err: unknown | AxiosError) {
 		}
 	} else {
 		toast({
-			text: 'Erro insperado no servidor',
+			text: 'Erro insperado no servidor.',
 			type: 'danger',
 		});
 	}

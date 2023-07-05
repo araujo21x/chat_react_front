@@ -21,7 +21,7 @@ export default function Home() {
 			</ContentContainer>
 
 			<Wave>
-				<img src={waveLogin} />
+				<img src={waveLogin} alt="Onda imagem no fundo" />
 			</Wave>
 		</Container>
 	);
