@@ -1,11 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useErrors from '../../../../hook/useErrors';
 import ZodGenericValidation from '../../../../lib/zod/ZodSchemaGeneric';
-import loginService from '../../../../services/LoginService';
-import { toast } from '../../../../utils/toast';
-import { AuthContext } from '../../../../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
-import { myAxiosInstance } from '../../../../services/utils/api';
+import { useAuth } from '../../../../context/AuthContext';
 
 export default function useLogin() {
 	const [email, setEmail] = useState<string>('');
@@ -13,10 +9,7 @@ export default function useLogin() {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const { getMessageZodErro, getErrorByField, errors } = useErrors();
 	const isFormValid = email && password && errors.length === 0;
-	const { editToken } = useContext(AuthContext);
-	const navigate = useNavigate();
-
-	useEffect(() => {}, []);
+	const { singIn } = useAuth();
 
 	function handlerEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
 		setEmail(event.target.value);
@@ -42,19 +35,9 @@ export default function useLogin() {
 		setIsLoading(true);
 		event.preventDefault();
 
-		const response = await loginService.post({ email, password });
-		if (!response) {
-			setIsLoading(false);
-			return;
-		}
+		await singIn(email, password);
 
-		localStorage.setItem('token', JSON.stringify(response.token));
-		myAxiosInstance.defaults.headers.common.Authorization = `Bearer ${response.token}`;
-		editToken(response.token);
-
-		toast({ text: 'Login feito com sucesso!', type: 'success' });
 		setIsLoading(false);
-		navigate('chat');
 	}
 
 	return {

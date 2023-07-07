@@ -3,8 +3,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import ToastMessage from '../ToastMessage';
 import { Container } from './styles';
-import IToast from '../../../utils/types/event/IToast';
 import { toastEventManager } from '../../../utils/toast';
+import IToast from '../../../shared/interfaces/IToast';
 
 export default function ToastContainer() {
 	const [messages, setMessages] = useState<IToast[]>([]);

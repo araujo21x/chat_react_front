@@ -1,18 +1,14 @@
-import { myAxiosInstance } from './utils/api';
-
-interface ILoginBody {
-	email: string;
-	password: string;
-}
-
-interface ILoginResponse {
-	token: string;
-	user: {};
-}
+import { AxiosResponse } from 'axios';
+import myAxiosInstance from '../lib/axios';
+import { ILoginBody } from '../shared/interfaces/IAuthInterfaces';
+import loginMappers from './mappers/LoginMappers';
 
 class LoginService {
-	public post(data: ILoginBody): Promise<ILoginResponse> {
-		return myAxiosInstance.post('/v1/sessions/standard', data);
+	public post(data: ILoginBody): Promise<AxiosResponse> {
+		return myAxiosInstance.post(
+			'/v1/sessions/standard',
+			loginMappers.toPersistence(data)
+		);
 	}
 }
 

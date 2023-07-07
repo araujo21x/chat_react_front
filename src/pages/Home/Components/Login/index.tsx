@@ -22,6 +22,7 @@ export default function Login() {
 				<FormGroup name="Email" error={getErrorByField('email')}>
 					<Input
 						value={email}
+						type="email"
 						error={getErrorByField('email')}
 						onChange={handlerEmailChange}
 					/>
@@ -30,6 +31,7 @@ export default function Login() {
 				<FormGroup name="Senha" error={getErrorByField('password')}>
 					<Input
 						value={password}
+						type="password"
 						error={getErrorByField('password')}
 						onChange={handlerPasswordChange}
 					/>

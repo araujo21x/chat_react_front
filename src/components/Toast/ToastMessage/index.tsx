@@ -1,8 +1,8 @@
 import { Container } from './styles';
 import xCircleIcon from '../../../assets/icons/x-circle.svg';
 import checkCircleIcon from '../../../assets/icons/check-circle.svg';
-import IToast from '../../../utils/types/event/IToast';
 import { useEffect } from 'react';
+import IToast from '../../../shared/interfaces/IToast';
 
 interface IToastMessage {
 	message: IToast;

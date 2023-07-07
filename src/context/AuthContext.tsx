@@ -5,15 +5,19 @@ import {
 	useEffect,
 	useState,
 } from 'react';
-import { myAxiosInstance } from '../services/utils/api';
+
 import { useNavigate } from 'react-router-dom';
 import { toast } from '../utils/toast';
 import loginService from '../services/LoginService';
 import errorRequest from '../services/utils/errorRequest';
+import myAxiosInstance from '../lib/axios';
+import { IAuth, IUserAuth } from '../shared/interfaces/IAuthInterfaces';
+import loginMappers from '../services/mappers/LoginMappers';
+import { IAuthResponse } from '../shared/interfaces/mappers/IAuthMappers';
 
 export interface IAuthContext {
-	token: string | null;
-	editToken: (token: string) => void;
+	auth: IAuth | null;
+	editAuth: (data: IAuth) => void;
 	singIn: (email: string, password: string) => Promise<void>;
 	logout: () => void;
 }
@@ -25,30 +29,34 @@ interface IAuthContextProps {
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export function AuthProvider({ children }: IAuthContextProps) {
-	const [token, setToken] = useState<string | null>(() => {
-		const tokenTeste = localStorage.getItem('token');
+	const [auth, setAuth] = useState<IAuth | null>(() => {
+		const token = localStorage.getItem('token');
+		const user = localStorage.getItem('user');
+		if (!token || !user) return null;
 
-		return tokenTeste;
+		return { token, user: JSON.parse(user) as IUserAuth };
 	});
 
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		const newToken = localStorage.getItem('token');
+		const token = localStorage.getItem('token');
+		const user = localStorage.getItem('user');
 
-		if (newToken) {
-			setToken(newToken);
-			myAxiosInstance.defaults.headers.common.Authorization = `Bearer ${newToken}`;
+		if (token && user) {
+			setAuth({ token, user: JSON.parse(user) as IUserAuth });
+			myAxiosInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
 		}
 	}, []);
 
-	function editToken(newToken: string): void {
-		setToken(newToken);
+	function editAuth(data: IAuth): void {
+		setAuth(data);
 	}
 
 	function logout(): void {
 		localStorage.removeItem('token');
-		setToken(null);
+		localStorage.removeItem('user');
+		setAuth(null);
 		myAxiosInstance.defaults.headers.common.Authorization = undefined;
 		navigate('/');
 	}
@@ -56,16 +64,22 @@ export function AuthProvider({ children }: IAuthContextProps) {
 	async function singIn(email: string, password: string): Promise<void> {
 		try {
 			const response = await loginService.post({ email, password });
+			const data: IAuth = loginMappers.toDomain(response.data as IAuthResponse);
+
 			toast({ text: 'Login feito com sucesso!', type: 'success' });
-			setToken(response.token);
-			navigate('/toTalk');
+			setAuth(data);
+
+			localStorage.setItem('token', data.token);
+			localStorage.setItem('user', JSON.stringify(data.user));
+
+			navigate('/chat');
 		} catch (err) {
 			errorRequest(err);
 		}
 	}
 
 	return (
-		<AuthContext.Provider value={{ token, editToken, logout, singIn }}>
+		<AuthContext.Provider value={{ auth, editAuth, logout, singIn }}>
 			{children}
 		</AuthContext.Provider>
 	);
