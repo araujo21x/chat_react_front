@@ -74,7 +74,8 @@ export function AuthProvider({ children }: IAuthContextProps) {
 
 			navigate('/chat');
 		} catch (err) {
-			errorRequest(err);
+			const isUnauthorized = errorRequest(err);
+			if (isUnauthorized) logout();
 		}
 	}
 
