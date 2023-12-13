@@ -2,11 +2,10 @@ import { css, styled } from 'styled-components';
 
 export const Container = styled.div`
 	width: 100%;
-	height: 68%;
+	height: 90%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	margin-top: 20%;
 	h1 {
 		color: ${({ theme }) => theme.colors.background};
 	}
@@ -14,11 +13,10 @@ export const Container = styled.div`
 
 export const Form = styled.form`
 	width: 100%;
-	height: 80%;
+	height: 98%;
 	display: flex;
 	flex-direction: column;
-
-	gap: 5%;
+	gap: 0.5rem;
 `;
 
 interface IInput {
@@ -61,7 +59,7 @@ export const Button = styled.button`
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 00.04);
 
 	font-weight: bold;
-	font-size: 1.2rem;
+	font-size: 1.3rem;
 	color: ${({ theme }) => theme.colors.background};
 	background: ${({ theme }) => theme.colors.primary.dark};
 

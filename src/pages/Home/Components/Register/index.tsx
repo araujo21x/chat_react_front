@@ -1,5 +1,6 @@
 import { Button, Container, Input, Form } from './styles';
 import FormGroup from '../../../../components/FormGroup';
+import FormGroupImg from '../../../../components/FormGroupImg';
 import useRegister from './useRegister';
 import Loader from '../../../../components/Loader';
 
@@ -11,6 +12,8 @@ export default function Register() {
 		handlerEmailChange,
 		password,
 		handlerPasswordChange,
+		imgPreview,
+		handleImageChange,
 		handlerSubmit,
 		isFormValid,
 		getErrorByField,
@@ -20,7 +23,12 @@ export default function Register() {
 	return (
 		<Container>
 			<Loader isLoading={isLoading} />
+
 			<Form onSubmit={handlerSubmit}>
+				<FormGroupImg name="Arquivo" img={imgPreview}>
+					<Input type="file" onChange={handleImageChange} />
+				</FormGroupImg>
+
 				<FormGroup name="Nome" error={getErrorByField('name')}>
 					<Input
 						value={name}

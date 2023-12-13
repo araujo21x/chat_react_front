@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useErrors from '../../../../hook/useErrors';
 import ZodGenericValidation from '../../../../lib/zod/ZodSchemaGeneric';
 import { useAuth } from '../../../../context/AuthContext';
