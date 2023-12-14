@@ -47,6 +47,7 @@ export default function Register() {
 
 				<FormGroup name="Senha" error={getErrorByField('password')}>
 					<Input
+						type="password"
 						value={password}
 						error={getErrorByField('password')}
 						onChange={handlerPasswordChange}
