@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Chat from './pages/chat';
 import PrivateRoute from './utils/PrivateRoute';
+import RecoveryPassword from './pages/RecoveryPassword';
 
 export default function Router() {
 	return (
@@ -11,6 +12,7 @@ export default function Router() {
 			</Route>
 
 			<Route path="/" Component={Home} />
+			<Route path="/recoveryPassword" Component={RecoveryPassword} />
 		</Routes>
 	);
 }

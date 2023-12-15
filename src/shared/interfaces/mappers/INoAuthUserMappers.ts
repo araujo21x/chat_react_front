@@ -8,3 +8,11 @@ export interface ICreateUserRequest {
 export interface ICreateUserResponse {
 	message: string;
 }
+
+export interface IForgotPasswordRequest {
+	email: string;
+}
+
+export interface IForgotPasswordResponse {
+	message: string;
+}

@@ -13,6 +13,7 @@ export default function Login() {
 		handlerSubmit,
 		getErrorByField,
 		isLoading,
+		handlerClickRecoveryPassword,
 	} = useLogin();
 
 	return (
@@ -42,7 +43,9 @@ export default function Login() {
 				</Button>
 			</Form>
 
-			<Button type="submit">Recuperar senha</Button>
+			<Button type="submit" onClick={handlerClickRecoveryPassword}>
+				Recuperar senha
+			</Button>
 		</Container>
 	);
 }

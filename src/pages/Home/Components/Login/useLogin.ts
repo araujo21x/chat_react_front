@@ -1,7 +1,8 @@
-import { useState } from 'react';
 import useErrors from '../../../../hook/useErrors';
 import ZodGenericValidation from '../../../../lib/zod/ZodSchemaGeneric';
+import { useState } from 'react';
 import { useAuth } from '../../../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function useLogin() {
 	const [email, setEmail] = useState<string>('');
@@ -10,6 +11,7 @@ export default function useLogin() {
 	const { getMessageZodErro, getErrorByField, errors } = useErrors();
 	const isFormValid = email && password && errors.length === 0;
 	const { singIn } = useAuth();
+	const navigate = useNavigate();
 
 	function handlerEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
 		setEmail(event.target.value);
@@ -40,6 +42,10 @@ export default function useLogin() {
 		setIsLoading(false);
 	}
 
+	function handlerClickRecoveryPassword() {
+		navigate('/recoveryPassword?type=forgot');
+	}
+
 	return {
 		email,
 		handlerEmailChange,
@@ -49,5 +55,6 @@ export default function useLogin() {
 		isFormValid,
 		getErrorByField,
 		isLoading,
+		handlerClickRecoveryPassword,
 	};
 }
