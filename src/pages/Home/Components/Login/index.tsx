@@ -41,6 +41,7 @@ export default function Login() {
 					Login
 				</Button>
 			</Form>
+
 			<Button type="submit">Recuperar senha</Button>
 		</Container>
 	);
