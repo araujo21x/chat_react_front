@@ -8,12 +8,12 @@ import {
 
 import { useNavigate } from 'react-router-dom';
 import { toast } from '../utils/toast';
-import loginService from '../services/LoginService';
+import loginService from '../services/session/SessionService';
 import errorRequest from '../services/utils/errorRequest';
 import myAxiosInstance from '../lib/axios';
-import { IAuth, IUserAuth } from '../shared/interfaces/IAuthInterfaces';
-import loginMappers from '../services/mappers/LoginMappers';
-import { IAuthResponse } from '../shared/interfaces/mappers/IAuthMappers';
+import { IAuth, IUserAuth } from '../shared/interfaces/session/IAuthInterfaces';
+import loginMappers from '../services/session/mappers/LoginMappers';
+import { IAuthResponse } from '../shared/interfaces/session/mappers/IAuthMappers';
 
 export interface IAuthContext {
 	auth: IAuth | null;

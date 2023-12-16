@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
+import Home from './pages/public/Home';
 import Chat from './pages/chat';
 import PrivateRoute from './utils/PrivateRoute';
-import RecoveryPassword from './pages/RecoveryPassword';
+import RecoveryPassword from './pages/public/RecoveryPassword';
 
 export default function Router() {
 	return (

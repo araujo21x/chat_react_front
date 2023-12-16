@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './assets/styles/global';
 import defaultTheme from './assets/styles/themes/default';
 import Router from './Router';
-import ToastContainer from './components/Toast/ToastContainer';
+import ToastContainer from './components/generics/Toast/ToastContainer';
 import { AuthProvider } from './context/AuthContext';
 
 export default function App() {

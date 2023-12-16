@@ -8,7 +8,7 @@ interface IDataError {
 
 export default function errorRequest(err: unknown | AxiosError) {
 	const IS_UNAUTHORIZED = false;
-
+	console.log(err);
 	if (!axios.isAxiosError(err)) {
 		toast({ text: 'Erro interno na conexão com o servidor!', type: 'danger' });
 		return IS_UNAUTHORIZED;
