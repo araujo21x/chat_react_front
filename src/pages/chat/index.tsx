@@ -1,9 +1,7 @@
-import { Container } from './styles';
-
 export default function Chat() {
 	return (
-		<Container>
+		<div>
 			<h1>chat</h1>
-		</Container>
+		</div>
 	);
 }
