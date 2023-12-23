@@ -13,21 +13,22 @@ import {
 	IconMenu,
 	Upside,
 	Bottom,
+	MenuItem,
+	MenuText,
 } from './styles';
 import { faComments } from '@fortawesome/free-regular-svg-icons';
 import {
 	faChevronRight,
-	faHouseChimney,
 	faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function NavigationBar() {
-	const { close, handleClose } = useNavigationBar();
+	const { containerMenu, close, handleClose, goToPage } = useNavigationBar();
 
 	return (
 		<Container close={close}>
 			<Header>
-				<Logo>
+				<Logo onClick={() => goToPage('chat')}>
 					<LogoImg>
 						<FontAwesomeIcon icon={faComments} size="xl" />
 					</LogoImg>
@@ -47,42 +48,44 @@ export default function NavigationBar() {
 
 			<MenuBar>
 				<Menu>
-					<MenuLinks close={close}>
+					<MenuLinks>
 						<Upside>
-							<li>
-								<a href="#">
-									<IconMenu>
-										<FontAwesomeIcon icon={faHouseChimney} />
-									</IconMenu>
-									{!close && <span>Home</span>}
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<IconMenu>
-										<FontAwesomeIcon icon={faHouseChimney} />
-									</IconMenu>
-									{!close && <span>Home</span>}
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<IconMenu>
-										<FontAwesomeIcon icon={faHouseChimney} />
-									</IconMenu>
-									{!close && <span>Home</span>}
-								</a>
-							</li>
+							{containerMenu.upside.map(function (item) {
+								return (
+									<MenuItem
+										key={item.id}
+										close={close}
+										selected={item.isSelected}
+										onClick={item.goTo}
+									>
+										<MenuText close={close} selected={item.isSelected}>
+											<IconMenu>
+												<FontAwesomeIcon icon={item.icon} />
+											</IconMenu>
+											{!close && <span>{item.name}</span>}
+										</MenuText>
+									</MenuItem>
+								);
+							})}
 						</Upside>
 						<Bottom>
-							<li>
-								<a href="#">
-									<IconMenu>
-										<FontAwesomeIcon icon={faHouseChimney} />
-									</IconMenu>
-									{!close && <span>Logout</span>}
-								</a>
-							</li>
+							{containerMenu.bottom.map(function (item) {
+								return (
+									<MenuItem
+										key={item.id}
+										close={close}
+										selected={item.isSelected}
+										onClick={item.goTo}
+									>
+										<MenuText close={close} selected={item.isSelected}>
+											<IconMenu>
+												<FontAwesomeIcon icon={item.icon} />
+											</IconMenu>
+											{!close && <span>{item.name}</span>}
+										</MenuText>
+									</MenuItem>
+								);
+							})}
 						</Bottom>
 					</MenuLinks>
 				</Menu>

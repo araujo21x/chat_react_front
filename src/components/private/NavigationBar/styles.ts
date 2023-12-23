@@ -2,11 +2,12 @@ import { styled, css } from 'styled-components';
 
 interface INavigationBarProps {
 	close: boolean;
+	selected?: boolean;
 }
 
 export const Container = styled.nav<INavigationBarProps>`
 	height: 100%;
-	width: ${({ close }) => (close ? '5rem' : '12.7rem')};
+	width: ${({ close }) => (close ? '5rem' : '14.5rem')};
 	background-color: ${({ theme }) => theme.colors.primary.dark};
 	border-radius: 20px 0 0 20px;
 	padding: 1rem;
@@ -37,7 +38,7 @@ export const Toggle = styled.div<INavigationBarProps>`
 	background-color: ${({ theme }) => theme.colors.background};
 	color: ${({ theme }) => theme.colors.primary.dark};
 	border-radius: 50%;
-	margin-left: ${({ close }) => (close ? '3rem' : '10.7rem')};
+	margin-left: ${({ close }) => (close ? '3rem' : '12.6rem')};
 `;
 
 export const LogoImg = styled.div`
@@ -65,45 +66,58 @@ export const Menu = styled.div`
 	height: 100%;
 `;
 
-export const MenuLinks = styled.ul<INavigationBarProps>`
+export const MenuLinks = styled.ul`
 	height: 90%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+`;
 
-	li {
-		display: flex;
-		align-items: center;
+export const MenuItem = styled.li<INavigationBarProps>`
+	display: flex;
+	align-items: center;
+	height: 3rem;
+	margin-top: 1rem;
+	list-style: none;
+	border-radius: 6px;
 
-		height: 3rem;
-		margin-top: 1rem;
-		list-style: none;
-		border-radius: 6px;
+	${({ selected }) =>
+		selected
+			? css`
+					background-color: ${({ theme }) => theme.colors.background};
+			  `
+			: css`
+					&:hover {
+						background-color: ${({ theme }) => theme.colors.background};
+					}
+			  `}
+`;
+export const MenuText = styled.a<INavigationBarProps>`
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	font-size: 1.3rem;
+	text-decoration: none;
 
-		a {
-			display: flex;
-			align-items: center;
-			${({ close }) =>
-				close
-					? css`
-							justify-content: center;
-					  `
-					: css``}
-			/* justify-content: center; // true */
-			width: 100%;
-			height: 100%;
-			font-size: 1.3rem;
-			text-decoration: none;
-			color: ${({ theme }) => theme.colors.background};
-			&:hover {
-				color: ${({ theme }) => theme.colors.primary.dark};
-			}
-		}
+	${({ close }) =>
+		close
+			? css`
+					justify-content: center;
+			  `
+			: css``}
 
-		&:hover {
-			background-color: ${({ theme }) => theme.colors.background};
-		}
-	}
+	${({ selected }) =>
+		selected
+			? css`
+					color: ${({ theme }) => theme.colors.primary.dark};
+			  `
+			: css`
+					color: ${({ theme }) => theme.colors.background};
+					&:hover {
+						color: ${({ theme }) => theme.colors.primary.dark};
+					}
+			  `}
 `;
 
 export const Upside = styled.div``;
