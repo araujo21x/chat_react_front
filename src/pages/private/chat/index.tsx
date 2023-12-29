@@ -1,7 +1,12 @@
+import UserList from './components/userList';
+import UserMsg from './components/userMsg';
+import { Container } from './styles';
+
 export default function Chat() {
 	return (
-		<div>
-			<h1>chat</h1>
-		</div>
+		<Container>
+			<UserList />
+			<UserMsg />
+		</Container>
 	);
 }
