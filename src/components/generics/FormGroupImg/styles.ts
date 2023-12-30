@@ -23,7 +23,7 @@ export const Container = styled.div`
 `;
 
 export const Img = styled.img`
-	width: auto;
+	/* width: auto; */
 	height: 8rem;
 	border-radius: 50%;
 	border: 1px solid ${({ theme }) => theme.colors.primary.maxDark};

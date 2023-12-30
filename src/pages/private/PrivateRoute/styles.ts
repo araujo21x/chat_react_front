@@ -6,8 +6,9 @@ export const Container = styled.div`
 	padding: 0.7rem;
 `;
 export const ContainerData = styled.div`
-	height: 100%;
-	width: 100%;
+	position: fixed;
+	height: 98%;
+	width: 98.9%;
 	display: flex;
 	border-radius: 20px;
 `;
