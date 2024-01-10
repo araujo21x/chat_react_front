@@ -21,7 +21,6 @@ export const ContainerImg = styled.div`
 export const Img = styled.img`
 	width: 3.5rem;
 	height: 3.5rem;
-	background-color: black;
 	border-radius: 50%;
 `;
 
@@ -34,23 +33,30 @@ export const ContainerMain = styled.div`
 	margin-left: 1%;
 `;
 
-export const MainText = styled.p`
+export const MainText = styled.div`
 	display: flex;
 	align-items: center;
 	width: 82%;
 	max-width: 82%;
 	height: 100%;
+	background-color: red;
 
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+	p {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
 `;
 
 export const MainStatus = styled.div``;
 
-export const Status = styled.div`
+interface IStatus {
+	online: boolean;
+}
+
+export const Status = styled.div<IStatus>`
 	width: 0.8rem;
 	height: 0.8rem;
-	background-color: green;
+	background-color: ${({ online }) => (online ? 'green' : 'red')};
 	border-radius: 50%;
 `;

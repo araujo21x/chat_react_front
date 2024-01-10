@@ -57,7 +57,8 @@ export default function useRegister() {
 			event.preventDefault();
 
 			const formData: FormData = new FormData();
-			if (image) formData.append('file', image);
+			if (!image) throw new Error('Imagem é obrigatória');
+			formData.append('file', image);
 			formData.append('name', name);
 			formData.append('email', email);
 			formData.append('password', password);

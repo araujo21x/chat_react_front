@@ -1,3 +1,5 @@
+import TypeRoom from '../../../../../../../shared/interfaces/enum/TypeRoom';
+import { IRoom } from '../../../../../../../shared/interfaces/generic/IRoom';
 import {
 	Container,
 	ContainerImg,
@@ -8,17 +10,29 @@ import {
 	ContainerMain,
 } from './styles';
 
-export default function UserCard() {
+interface IUserCardProps {
+	room: IRoom;
+}
+
+export default function UserCard({ room }: IUserCardProps) {
 	return (
 		<Container>
 			<ContainerImg>
-				<Img />
+				<Img src={room.image ? room.image : room.addresseeUser?.image} />
 			</ContainerImg>
 			<ContainerMain>
-				<MainText>Nome de teste</MainText>
-				<MainStatus>
-					<Status />
-				</MainStatus>
+				<MainText>
+					<p>{room.name ? room.name : room.addresseeUser?.name}</p>
+				</MainText>
+				{room.type === TypeRoom.PRIVATE && (
+					<MainStatus>
+						<Status
+							online={
+								room.addresseeUser?.online ? room.addresseeUser?.online : false
+							}
+						/>
+					</MainStatus>
+				)}
 			</ContainerMain>
 		</Container>
 	);
