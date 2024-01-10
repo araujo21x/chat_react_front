@@ -39,7 +39,6 @@ export const MainText = styled.div`
 	width: 82%;
 	max-width: 82%;
 	height: 100%;
-	background-color: red;
 
 	p {
 		overflow: hidden;
