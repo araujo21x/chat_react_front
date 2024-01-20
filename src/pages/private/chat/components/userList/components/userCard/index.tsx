@@ -12,11 +12,20 @@ import {
 
 interface IUserCardProps {
 	room: IRoom;
+	selectedUserId: number | null;
+	handlerSelectUserId: (id: number | null) => void;
 }
 
-export default function UserCard({ room }: IUserCardProps) {
+export default function UserCard({
+	room,
+	selectedUserId,
+	handlerSelectUserId,
+}: IUserCardProps) {
 	return (
-		<Container>
+		<Container
+			onClick={() => handlerSelectUserId(room.id)}
+			isSelected={selectedUserId === room.id}
+		>
 			<ContainerImg>
 				<Img src={room.image ? room.image : room.addresseeUser?.image} />
 			</ContainerImg>

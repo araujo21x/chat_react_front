@@ -7,10 +7,18 @@ import { IRoomIndexResponse } from '../../../shared/interfaces/room/mappers/IRoo
 
 export type IUseChat = {
 	rooms: IRoom[];
+	selectedUserId: number | null;
+	handlerSelectUserId: (id: number | null) => void;
 };
 
 export default function useChat(): IUseChat {
 	const [rooms, setRooms] = useState<IRoom[]>([]);
+	const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
+
+	function handlerSelectUserId(id: number | null) {
+		setSelectedUserId((prevState: number | null) => (prevState = id));
+	}
+
 	useEffect(() => {
 		async function loadRoom() {
 			try {
@@ -25,5 +33,5 @@ export default function useChat(): IUseChat {
 		loadRoom();
 	}, []);
 
-	return { rooms };
+	return { rooms, selectedUserId, handlerSelectUserId };
 }

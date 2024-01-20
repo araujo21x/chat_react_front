@@ -1,6 +1,10 @@
 import { styled } from 'styled-components';
 
-export const Container = styled.div`
+interface SelectUser {
+	isSelected: boolean;
+}
+
+export const Container = styled.div<SelectUser>`
 	display: flex;
 	align-items: center;
 	padding: 0.5rem;
@@ -9,6 +13,8 @@ export const Container = styled.div`
 	max-height: 4.5rem;
 	border-bottom: 1.3px solid ${({ theme }) => theme.colors.primary.light};
 	border-radius: 5px;
+	background-color: ${({ isSelected, theme }) =>
+		isSelected ? theme.colors.primary.light : 'none'};
 `;
 
 export const ContainerImg = styled.div`
