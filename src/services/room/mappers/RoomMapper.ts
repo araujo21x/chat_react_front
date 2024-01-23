@@ -2,14 +2,16 @@ import { IRoom } from '../../../shared/interfaces/generic/IRoom';
 import {
 	IRoomIndex,
 	IRoomIndexQuery,
+	IRoomShow,
 } from '../../../shared/interfaces/room/IRoomInterfaces';
 import {
 	IRoomIndexRequest,
 	IRoomIndexResponse,
+	IRoomShowResponse,
 } from '../../../shared/interfaces/room/mappers/IRoomMappers';
 
 class RoomMapper {
-	toPersistence(domain: IRoomIndexQuery): IRoomIndexRequest {
+	toPersistenceIndex(domain: IRoomIndexQuery): IRoomIndexRequest {
 		const params: IRoomIndexRequest = {};
 
 		if (domain.limit) params.limit = domain.limit;
@@ -21,7 +23,7 @@ class RoomMapper {
 		return params;
 	}
 
-	toDomain(persistent: IRoomIndexResponse): IRoomIndex {
+	toDomainIndex(persistent: IRoomIndexResponse): IRoomIndex {
 		return {
 			count: persistent.countRooms,
 			rooms: persistent.rooms.map((room): IRoom => {
@@ -39,6 +41,24 @@ class RoomMapper {
 					updatedAt: room.updatedAt,
 				};
 			}),
+		};
+	}
+
+	toDomainShow(persistent: IRoomShowResponse): IRoomShow {
+		return {
+			id: persistent.id,
+			type: persistent.type,
+			name: persistent.name,
+			description: persistent.description,
+			image: persistent.image,
+			imageKey: persistent.imageKey,
+			myUser: persistent.myUser,
+			addresseeUser: persistent.addresseeUser
+				? persistent.addresseeUser
+				: undefined,
+			messages: persistent.messages ? persistent.messages : [],
+			createdAt: persistent.createdAt,
+			updatedAt: persistent.updatedAt,
 		};
 	}
 }

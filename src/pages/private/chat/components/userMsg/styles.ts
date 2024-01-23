@@ -7,3 +7,11 @@ export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 `;
+
+export const ContainerNotFound = styled.div`
+	display: flex;
+	flex-grow: 1;
+	align-items: center;
+	justify-content: center;
+	border-left: 2px solid ${({ theme }) => theme.colors.primary.light};
+`;

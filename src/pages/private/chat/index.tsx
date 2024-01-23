@@ -4,16 +4,17 @@ import { Container } from './styles';
 import useChat from './useChat';
 
 export default function Chat() {
-	const { rooms, selectedUserId, handlerSelectUserId } = useChat();
+	const { rooms, selectedRoom, handlerSelectRoom } = useChat();
 
 	return (
 		<Container>
 			<UserList
 				rooms={rooms}
-				selectedUserId={selectedUserId}
-				handlerSelectUserId={handlerSelectUserId}
+				selectedRoom={selectedRoom}
+				handlerSelectRoom={handlerSelectRoom}
 			/>
-			<UserMsg />
+
+			<UserMsg room={selectedRoom} />
 		</Container>
 	);
 }

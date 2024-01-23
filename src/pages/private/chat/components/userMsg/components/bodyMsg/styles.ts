@@ -36,3 +36,14 @@ export const Ballon = styled.div<IBallonProps>`
 		word-wrap: break-word;
 	}
 `;
+
+export const File = styled.div`
+	width: 100%;
+	height: auto;
+	border-radius: 5px;
+`;
+
+export const IMG = styled.img`
+	width: 100%;
+	height: auto;
+`;

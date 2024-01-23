@@ -1,5 +1,6 @@
 import TypeRoom from '../../../../../../../shared/interfaces/enum/TypeRoom';
 import { IRoom } from '../../../../../../../shared/interfaces/generic/IRoom';
+
 import {
 	Container,
 	ContainerImg,
@@ -12,19 +13,19 @@ import {
 
 interface IUserCardProps {
 	room: IRoom;
-	selectedUserId: number | null;
-	handlerSelectUserId: (id: number | null) => void;
+	selectedRoom: IRoom | null;
+	handlerSelectRoom: (id: IRoom | null) => void;
 }
 
 export default function UserCard({
 	room,
-	selectedUserId,
-	handlerSelectUserId,
+	selectedRoom,
+	handlerSelectRoom,
 }: IUserCardProps) {
 	return (
 		<Container
-			onClick={() => handlerSelectUserId(room.id)}
-			isSelected={selectedUserId === room.id}
+			onClick={() => handlerSelectRoom(room)}
+			isSelected={selectedRoom ? selectedRoom.id === room.id : false}
 		>
 			<ContainerImg>
 				<Img src={room.image ? room.image : room.addresseeUser?.image} />

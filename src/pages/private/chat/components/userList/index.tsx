@@ -1,16 +1,17 @@
 import { IRoom } from '../../../../../shared/interfaces/generic/IRoom';
 import UserCard from './components/userCard';
 import { Container, List } from './styles';
+
 interface IUserListProps {
 	rooms: IRoom[];
-	selectedUserId: number | null;
-	handlerSelectUserId: (id: number | null) => void;
+	selectedRoom: IRoom | null;
+	handlerSelectRoom: (id: IRoom | null) => void;
 }
 
 export default function UserList({
 	rooms,
-	selectedUserId,
-	handlerSelectUserId,
+	selectedRoom,
+	handlerSelectRoom,
 }: IUserListProps) {
 	return (
 		<Container>
@@ -20,8 +21,8 @@ export default function UserList({
 						<UserCard
 							key={room.id}
 							room={room}
-							selectedUserId={selectedUserId}
-							handlerSelectUserId={handlerSelectUserId}
+							selectedRoom={selectedRoom}
+							handlerSelectRoom={handlerSelectRoom}
 						/>
 					);
 				})}
