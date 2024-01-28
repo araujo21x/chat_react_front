@@ -1,20 +1,15 @@
 import { styled } from 'styled-components';
 
-interface SelectUser {
-	isSelected: boolean;
-}
-
-export const Container = styled.div<SelectUser>`
+export const Container = styled.div`
 	display: flex;
 	align-items: center;
 	padding: 0.5rem;
-	width: 100%;
-	min-height: 4.5rem;
-	max-height: 4.5rem;
-	border-bottom: 1.3px solid ${({ theme }) => theme.colors.primary.dark};
-	border-radius: 5px;
-	background-color: ${({ isSelected, theme }) =>
-		isSelected ? theme.colors.primary.light : 'none'};
+	height: 6rem;
+	width: 20rem;
+	background-color: ${({ theme }) => theme.colors.primary.dark};
+	border-bottom: 2px solid ${({ theme }) => theme.colors.primary.light};
+	border-right: 2px solid ${({ theme }) => theme.colors.primary.light};
+	border-radius: 13px;
 `;
 
 export const ContainerImg = styled.div`
@@ -51,17 +46,4 @@ export const MainText = styled.div`
 		white-space: nowrap;
 		text-overflow: ellipsis;
 	}
-`;
-
-export const MainStatus = styled.div``;
-
-interface IStatus {
-	online: boolean;
-}
-
-export const Status = styled.div<IStatus>`
-	width: 0.8rem;
-	height: 0.8rem;
-	background-color: ${({ online }) => (online ? 'green' : 'red')};
-	border-radius: 50%;
 `;

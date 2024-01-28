@@ -8,6 +8,7 @@ import {
 	File,
 	IMG,
 } from './styles';
+import useBodyMsg from './useBodyMsg';
 
 interface IBodyMsg {
 	messages: IMessage[];
@@ -15,9 +16,11 @@ interface IBodyMsg {
 }
 
 export default function BodyMsg({ messages, my }: IBodyMsg) {
+	const { containerRef } = useBodyMsg(messages);
+
 	return (
 		<Container>
-			<ContainerMsg>
+			<ContainerMsg ref={containerRef}>
 				{messages.map((msg: IMessage) => (
 					<BallonContainer key={msg.id} my={my.id === msg.sender.id}>
 						<Ballon my={my.id === msg.sender.id}>

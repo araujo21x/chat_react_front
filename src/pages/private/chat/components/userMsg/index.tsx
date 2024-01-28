@@ -1,16 +1,11 @@
-import { IRoom } from '../../../../../shared/interfaces/generic/IRoom';
 import BodyMsg from './components/bodyMsg';
 import BottomMsg from './components/bottomMsg';
 import HeaderMsg from './components/headerMsg';
 import { Container, ContainerNotFound } from './styles';
 import useUserMsg from './useUserMsg';
 
-interface IUserMsg {
-	room: IRoom | null;
-}
-
-export default function UserMsg({ room }: IUserMsg) {
-	const { messages, handlerMessages } = useUserMsg(room);
+export default function UserMsg() {
+	const { messages, handlerMessages, room } = useUserMsg();
 
 	return room ? (
 		<Container>

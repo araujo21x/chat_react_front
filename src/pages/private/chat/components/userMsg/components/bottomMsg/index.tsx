@@ -5,12 +5,15 @@ import {
 	faPaperPlane,
 	faPaperclip,
 } from '@fortawesome/free-solid-svg-icons';
+import useBodyMsg from './useBodyMsg';
 
 interface IBottomMsg {
 	handlerMessages: (msg: string) => void;
 }
 
 export default function BottomMsg({ handlerMessages }: IBottomMsg) {
+	const { msg, handlerMsgChange, handlerSubmit } = useBodyMsg(handlerMessages);
+
 	return (
 		<Container>
 			<IconContainer>
@@ -18,11 +21,25 @@ export default function BottomMsg({ handlerMessages }: IBottomMsg) {
 			</IconContainer>
 
 			<Form>
-				<Input type="text" />
+				<Input
+					type="text"
+					value={msg}
+					onChange={handlerMsgChange}
+					onKeyDown={(e) => {
+						if (e.key === 'Enter') {
+							e.preventDefault();
+							handlerSubmit();
+						}
+					}}
+				/>
 			</Form>
 
 			<IconContainer>
-				{true && <FontAwesomeIcon icon={faPaperPlane} />}
+				{true && (
+					<div onClick={() => handlerSubmit()}>
+						<FontAwesomeIcon icon={faPaperPlane} />
+					</div>
+				)}
 				{false && <FontAwesomeIcon icon={faMicrophone} />}
 			</IconContainer>
 		</Container>

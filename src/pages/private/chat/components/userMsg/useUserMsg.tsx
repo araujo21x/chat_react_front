@@ -6,16 +6,22 @@ import roomService from '../../../../../services/room/RoomService';
 import roomMapper from '../../../../../services/room/mappers/RoomMapper';
 import { IRoomShowResponse } from '../../../../../shared/interfaces/room/mappers/IRoomMappers';
 import { socket } from '../../../PrivateRoute/usePrivateRoute';
-import teste0101 from './teste';
+import { useRoom } from '../../../../../context/RoomContext';
+import errorEventSocket, {
+	IDataErrorSocket,
+} from '../../../../../services/utils/errorEventSocket';
 
 export type IUseUserMsg = {
 	messages: IMessage[];
 	handlerMessages: (msg: string) => void;
+	room: IRoom | null;
 };
 
-export default function useUserMsg(room: IRoom | null): IUseUserMsg {
+export default function useUserMsg(): IUseUserMsg {
 	const [messages, SetMessages] = useState<IMessage[]>([]);
-	teste0101(room);
+	const { selectedRoom: room, getSelectRoom } = useRoom();
+	const [newMessages, SetNewMessages] = useState<string[]>([]);
+
 	useEffect(() => {
 		async function loadMessages() {
 			try {
@@ -33,17 +39,45 @@ export default function useUserMsg(room: IRoom | null): IUseUserMsg {
 	}, [room]);
 
 	useEffect(() => {
-		socket.on('msgArrived', (data) => {
-			const teste01 = teste0101();
-			if (teste01.id === data.message.room.id) {
+		function onMsgArrived(data: { message: IMessage }) {
+			const myCurrenlyRoom = getSelectRoom().storage;
+			if ((myCurrenlyRoom as IRoom).id === data.message.room.id) {
 				SetMessages((prevStatus) => {
+					const exist = prevStatus.find((msg) => msg.id === data.message.id);
+					if (exist) return [...prevStatus];
 					return [...prevStatus, data.message];
 				});
 			}
+		}
+
+		function onMsgReceived(data: { message: IMessage }) {
+			const myCurrenlyRoom = getSelectRoom().storage;
+			if ((myCurrenlyRoom as IRoom).id === data.message.room.id) {
+				SetMessages((prevStatus) => {
+					const exist = prevStatus.find((msg) => msg.id === data.message.id);
+					if (exist) return [...prevStatus];
+					return [...prevStatus, data.message];
+				});
+			}
+		}
+
+		socket.on('errorSocket', (data: IDataErrorSocket) => {
+			errorEventSocket(data);
 		});
+
+		socket.on('msgArrived', onMsgArrived);
+		socket.on('msgReceived', onMsgReceived);
 	}, []);
 
-	function handlerMessages(msg: string) {}
+	function handlerMessages(msg: string) {
+		const value = {
+			content: msg,
+			roomId: room?.id,
+			addresseeId: room?.addresseeUser?.id,
+		};
 
-	return { messages, handlerMessages };
+		socket.emit('sendMsg', value);
+	}
+
+	return { messages, handlerMessages, room };
 }
