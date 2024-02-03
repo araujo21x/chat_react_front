@@ -18,10 +18,17 @@ interface IRoomContextProps {
 export const RoomContext = createContext<IRoomContext>({} as IRoomContext);
 
 export function RoomProvider({ children }: IRoomContextProps) {
-	const [selectedRoom, setSelectedRoom] = useState<IRoom | null>(null);
+	const [selectedRoom, setSelectedRoom] = useState<IRoom | null>(() => {
+		const room: string | null = localStorage.getItem('selectedRoom');
+
+		if (!room) return null;
+
+		return JSON.parse(room) as IRoom;
+	});
 
 	function handlerSelectRoom(room: IRoom | null): void {
 		if (room) localStorage.setItem('selectedRoom', JSON.stringify(room));
+
 		setSelectedRoom(room);
 	}
 

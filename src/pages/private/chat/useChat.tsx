@@ -19,6 +19,7 @@ export default function useChat(): IUseChat {
 				const data = roomMapper.toDomainIndex(
 					response.data as IRoomIndexResponse
 				);
+
 				setRooms(data.rooms);
 			} catch (err) {
 				errorRequest(err);

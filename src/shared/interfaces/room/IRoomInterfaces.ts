@@ -19,3 +19,8 @@ export interface IRoomIndex {
 export interface IRoomShow extends IRoom {
 	messages: IMessage[];
 }
+
+export interface IRoomCreate {
+	room: IRoom;
+	message: string;
+}

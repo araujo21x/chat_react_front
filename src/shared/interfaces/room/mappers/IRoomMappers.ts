@@ -1,5 +1,6 @@
 import TypeRoom from '../../enum/TypeRoom';
 import { IMessage } from '../../generic/IMessage';
+import { IRoom } from '../../generic/IRoom';
 import { IUser } from '../../generic/IUser';
 
 export interface IRoomIndexRequest {
@@ -27,4 +28,9 @@ export interface IRoomShowResponse {
 	messages?: IMessage[];
 	createdAt: string;
 	updatedAt: string;
+}
+
+export interface IRoomCreateResponse {
+	message: string;
+	room: IRoom;
 }

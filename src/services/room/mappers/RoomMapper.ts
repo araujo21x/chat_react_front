@@ -1,10 +1,12 @@
 import { IRoom } from '../../../shared/interfaces/generic/IRoom';
 import {
+	IRoomCreate,
 	IRoomIndex,
 	IRoomIndexQuery,
 	IRoomShow,
 } from '../../../shared/interfaces/room/IRoomInterfaces';
 import {
+	IRoomCreateResponse,
 	IRoomIndexRequest,
 	IRoomIndexResponse,
 	IRoomShowResponse,
@@ -59,6 +61,17 @@ class RoomMapper {
 			messages: persistent.messages ? persistent.messages : [],
 			createdAt: persistent.createdAt,
 			updatedAt: persistent.updatedAt,
+		};
+	}
+
+	toPersistenceCreate(id: number): { userId: number } {
+		return { userId: id };
+	}
+
+	toDomainCreate(persistent: IRoomCreateResponse): IRoomCreate {
+		return {
+			message: persistent.message,
+			room: persistent.room,
 		};
 	}
 }

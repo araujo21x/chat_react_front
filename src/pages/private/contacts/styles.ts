@@ -12,11 +12,14 @@ export const Container = styled.div`
 
 export const UserListContainer = styled.div`
 	display: grid;
-	height: 100%;
 	width: 100%;
+	max-height: 100%s;
 	grid-template-columns: repeat(4, 1fr);
-	grid-column-gap: 1rem;
-	grid-row-gap: 1rem;
-	grid-auto-flow: Row;
+	grid-gap: 0.7em;
 	overflow-y: auto;
+
+	> * {
+		grid-column: span 1;
+		width: 100%;
+	}
 `;

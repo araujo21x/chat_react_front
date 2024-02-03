@@ -20,7 +20,6 @@ export type IUseUserMsg = {
 export default function useUserMsg(): IUseUserMsg {
 	const [messages, SetMessages] = useState<IMessage[]>([]);
 	const { selectedRoom: room, getSelectRoom } = useRoom();
-	const [newMessages, SetNewMessages] = useState<string[]>([]);
 
 	useEffect(() => {
 		async function loadMessages() {
@@ -29,6 +28,7 @@ export default function useUserMsg(): IUseUserMsg {
 				const data = roomMapper.toDomainShow(
 					response.data as IRoomShowResponse
 				);
+
 				SetMessages(data.messages);
 			} catch (err) {
 				errorRequest(err);

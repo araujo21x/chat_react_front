@@ -36,6 +36,7 @@ export default function useNavigationBar(): INavigationBar {
 	const [currentItem, setCurrentItem] = useState<string>(
 		getPathname(useLocation().pathname)[1]
 	);
+
 	const navigate = useNavigate();
 	const { logout } = useAuth();
 	function goToPage(page: string) {
@@ -60,22 +61,8 @@ export default function useNavigationBar(): INavigationBar {
 				isSelected: currentItem === 'contacts',
 				goTo: () => goToPage('contacts'),
 			},
-			{
-				id: 'upside_3',
-				name: 'Favoritos',
-				icon: faStar,
-				isSelected: currentItem === 'favorites',
-				goTo: () => goToPage('favorites'),
-			},
 		],
 		bottom: [
-			{
-				id: 'bottom_1',
-				name: 'Configurações',
-				icon: faGear,
-				isSelected: currentItem === 'config',
-				goTo: () => goToPage('config'),
-			},
 			{
 				id: 'bottom_2',
 				name: 'Logout',
