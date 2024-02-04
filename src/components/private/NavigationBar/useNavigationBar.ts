@@ -1,9 +1,7 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {
-	faGear,
 	faMessage,
 	faRightFromBracket,
-	faStar,
 	faUsers,
 } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
